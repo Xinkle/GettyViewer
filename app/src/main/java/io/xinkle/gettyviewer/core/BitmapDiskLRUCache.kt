@@ -25,7 +25,7 @@ class BitmapDiskLRUCache(private val mDiskLRUCache: DiskLruCache) {
 
         private fun buildCache(applicationContext: Context): BitmapDiskLRUCache {
             val cacheDir = getDiskCacheDir(applicationContext, DISK_CACHE_SUBDIR)
-            val diskCache = DiskLruCache.open(cacheDir, 0, 100, DISK_CACHE_SIZE)
+            val diskCache = DiskLruCache.open(cacheDir, 1, 1, DISK_CACHE_SIZE)
 
             return BitmapDiskLRUCache(diskCache)
         }
@@ -50,14 +50,17 @@ class BitmapDiskLRUCache(private val mDiskLRUCache: DiskLruCache) {
      * if key doesn't exist, return null
      */
     fun getBitmap(key: String): Bitmap? {
-        return BitmapFactory.decodeStream(mDiskLRUCache.get(key)?.getInputStream(0))
+        return BitmapFactory.decodeStream(mDiskLRUCache.get(
+                key.replace(Regex("[^a-z0-9_-]{1,120}"), ""))?.getInputStream(0))
     }
 
     /**
      * Put bitmap to Disk LRU Cache
      */
     fun putBitmap(key: String, bitmap: Bitmap) {
-        val outStream = mDiskLRUCache.edit(key).newOutputStream(0)
+        val editor = mDiskLRUCache.edit(key.replace(Regex("[^a-z0-9_-]{1,120}"), ""))
+        val outStream = editor.newOutputStream(0)
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream)
+        editor.commit()
     }
 }
