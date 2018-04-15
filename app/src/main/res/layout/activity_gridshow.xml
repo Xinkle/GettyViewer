@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GridShowActivity">
+    tools:context=".view.GridShowActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/grid_image_view"

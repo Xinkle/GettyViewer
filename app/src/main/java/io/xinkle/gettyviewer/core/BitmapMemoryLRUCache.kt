@@ -13,7 +13,6 @@ object BitmapMemoryLRUCache {
         }
     }
 
-    @Synchronized
     fun putBitmap(key: String, bitmap: Bitmap) {
         val filteredKey = key.replace(Regex("[^a-z0-9_-]{1,120}"), "")
         if (getBitmap(filteredKey) == null) {
@@ -21,7 +20,6 @@ object BitmapMemoryLRUCache {
         }
     }
 
-    @Synchronized
     fun getBitmap(key: String): Bitmap? {
         val filteredKey = key.replace(Regex("[^a-z0-9_-]{1,120}"), "")
         return mMemoryCache.get(filteredKey)

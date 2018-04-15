@@ -12,7 +12,7 @@ object ImageDownloader {
         val url = URL(urlString)
 
         return when {
-            width >= 0 && height >= 0 -> {
+            width >= 1 && height >= 1 -> {
                 val bitmapOption = BitmapFactory.Options()
                 bitmapOption.inJustDecodeBounds = true
 

@@ -11,7 +11,7 @@ import java.io.File
 
 class BitmapDiskLRUCache(private val mDiskLRUCache: DiskLruCache) {
     companion object {
-        private const val DISK_CACHE_SIZE = 1024 * 1024 * 10L // 10MB
+        private const val DISK_CACHE_SIZE = 1024 * 1024 * 30L // 30MB
         private const val DISK_CACHE_SUBDIR = "images"
 
         @Volatile
@@ -49,7 +49,6 @@ class BitmapDiskLRUCache(private val mDiskLRUCache: DiskLruCache) {
      * Return bitmap when key is available in Disk LRU Cache
      * if key doesn't exist, return null
      */
-    @Synchronized
     fun getBitmap(key: String): Bitmap? {
         return BitmapFactory.decodeStream(mDiskLRUCache.get(
                 key.replace(Regex("[^a-z0-9_-]{1,120}"), ""))?.getInputStream(0))
@@ -58,7 +57,6 @@ class BitmapDiskLRUCache(private val mDiskLRUCache: DiskLruCache) {
     /**
      * Put bitmap to Disk LRU Cache
      */
-    @Synchronized
     fun putBitmap(key: String, bitmap: Bitmap) {
         val editor = mDiskLRUCache.edit(key.replace(Regex("[^a-z0-9_-]{1,120}"), ""))
         val outStream = editor.newOutputStream(0)
