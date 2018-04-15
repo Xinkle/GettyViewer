@@ -49,6 +49,7 @@ class BitmapDiskLRUCache(private val mDiskLRUCache: DiskLruCache) {
      * Return bitmap when key is available in Disk LRU Cache
      * if key doesn't exist, return null
      */
+    @Synchronized
     fun getBitmap(key: String): Bitmap? {
         return BitmapFactory.decodeStream(mDiskLRUCache.get(
                 key.replace(Regex("[^a-z0-9_-]{1,120}"), ""))?.getInputStream(0))
@@ -57,6 +58,7 @@ class BitmapDiskLRUCache(private val mDiskLRUCache: DiskLruCache) {
     /**
      * Put bitmap to Disk LRU Cache
      */
+    @Synchronized
     fun putBitmap(key: String, bitmap: Bitmap) {
         val editor = mDiskLRUCache.edit(key.replace(Regex("[^a-z0-9_-]{1,120}"), ""))
         val outStream = editor.newOutputStream(0)

@@ -27,9 +27,8 @@ class BitmapDiskLRUCacheTest {
     @Test
     fun put_bitmap_and_get_bitmap_successful() {
         // TODO: Must be replace local bitmap
-        val imgDownloader = ImageDownloader()
         val urlString = "http://www.gettyimagesgallery.com/Images/Thumbnails/1340/134050.jpg"
-        val bitmap = imgDownloader.getImageFromUrl(urlString)
+        val bitmap = ImageDownloader.getImageFromUrl(urlString)
 
         diskCache.putBitmap(urlString, bitmap!!)
 
