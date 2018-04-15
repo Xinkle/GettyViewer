@@ -7,7 +7,7 @@ import java.net.URL
 
 
 class ImageDownloader {
-    fun getImageFromUrl(urlString: String, width: Int, height: Int): Bitmap? {
+    fun getImageFromUrl(urlString: String): Bitmap? {
         val url = URL(urlString)
         val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
 
