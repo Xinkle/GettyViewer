@@ -2,18 +2,17 @@ package io.xinkle.gettyviewer.core
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Environment
-import java.io.File.separator
-import android.os.Environment.MEDIA_MOUNTED
 import android.os.Environment.isExternalStorageRemovable
 import com.jakewharton.disklrucache.DiskLruCache
 import java.io.File
 
 
-class BitmapDiskLRUCache(mDiskLRUCache: DiskLruCache) {
+class BitmapDiskLRUCache(private val mDiskLRUCache: DiskLruCache) {
     companion object {
         private const val DISK_CACHE_SIZE = 1024 * 1024 * 10L // 10MB
-        private const val DISK_CACHE_SUBDIR = "thumbnails"
+        private const val DISK_CACHE_SUBDIR = "images"
 
         @Volatile
         private var INSTANCE: BitmapDiskLRUCache? = null
@@ -46,11 +45,19 @@ class BitmapDiskLRUCache(mDiskLRUCache: DiskLruCache) {
         }
     }
 
-    fun getBitmap(key: String) {
-
+    /**
+     * Return bitmap when key is available in Disk LRU Cache
+     * if key doesn't exist, return null
+     */
+    fun getBitmap(key: String): Bitmap? {
+        return BitmapFactory.decodeStream(mDiskLRUCache.get(key)?.getInputStream(0))
     }
 
+    /**
+     * Put bitmap to Disk LRU Cache
+     */
     fun putBitmap(key: String, bitmap: Bitmap) {
-
+        val outStream = mDiskLRUCache.edit(key).newOutputStream(0)
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream)
     }
 }
