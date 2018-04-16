@@ -21,11 +21,7 @@ class GettyImageAdapter(private val context: Context) :
     }
 
     override fun onBindViewHolder(holder: GettyImageHolder?, position: Int) {
-        holder?.bindView(itemList[position], position)
-    }
-
-    override fun onViewDetachedFromWindow(holder: GettyImageHolder?) {
-        holder?.detachedView()
+        holder?.bindView(itemList[position])
     }
 
     override fun reload() {
@@ -39,8 +35,4 @@ class GettyImageAdapter(private val context: Context) :
     override fun clear() {
         itemList.clear()
     }
-
-
-
-
 }

@@ -20,7 +20,7 @@ class GettyImageHolder(private val context: Context, parent: ViewGroup?) :
 
     private var task: ImageLoaderTask? = null
 
-    fun bindView(item: GettyImage, position: Int) {
+    fun bindView(item: GettyImage) {
         when (task?.status) {
             AsyncTask.Status.PENDING, AsyncTask.Status.RUNNING -> {
                 task!!.cancel(true)
@@ -31,11 +31,4 @@ class GettyImageHolder(private val context: Context, parent: ViewGroup?) :
         task!!.execute(item.url)
     }
 
-    fun detachedView() {
-//        if(task.status != AsyncTask.Status.FINISHED) {
-//            task.attched = false
-//            Log.d(TAG, "View detached Item : ${}")
-//        }
-//        Log.d(TAG, "View detached")
-    }
 }
