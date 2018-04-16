@@ -15,6 +15,8 @@ class ImageLoaderTask(mContext: Context, imageView: ImageView)
     private val mDiskCache = BitmapDiskLRUCache.getInstance(mContext.applicationContext)
     private val mWeakImageView: WeakReference<ImageView> = WeakReference(imageView)
 
+    var attached = true
+
     override fun onPreExecute() {
         mWeakImageView.get()!!.setImageResource(R.drawable.loading)
     }
@@ -25,7 +27,7 @@ class ImageLoaderTask(mContext: Context, imageView: ImageView)
     }
 
     override fun onPostExecute(resultBitmap: Bitmap) {
-        mWeakImageView.get()!!.setImageBitmap(resultBitmap)
+        if (attached) mWeakImageView.get()!!.setImageBitmap(resultBitmap)
     }
 
 

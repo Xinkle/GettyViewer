@@ -11,7 +11,7 @@ import java.io.File
 
 class BitmapDiskLRUCache(private val mDiskLRUCache: DiskLruCache) {
     companion object {
-        private const val DISK_CACHE_SIZE = 1024 * 1024 * 30L // 30MB
+        private const val DISK_CACHE_SIZE = 1024 * 1024 * 15L // 15MB
         private const val DISK_CACHE_SUBDIR = "images"
 
         @Volatile

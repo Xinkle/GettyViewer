@@ -8,7 +8,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BitmapMemoryLRUCacheTest {
-    lateinit var memoryCache: BitmapMemoryLRUCache
+    private lateinit var memoryCache: BitmapMemoryLRUCache
 
     @Before
     fun setUp() {

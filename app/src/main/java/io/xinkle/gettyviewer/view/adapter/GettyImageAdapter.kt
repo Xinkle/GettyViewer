@@ -10,7 +10,7 @@ class GettyImageAdapter(private val context: Context) :
         GettyImageAdapterContract.View,
         GettyImageAdapterContract.Model {
 
-    val itemList: MutableList<GettyImage> = ArrayList()
+    private val itemList: MutableList<GettyImage> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): GettyImageHolder {
         return GettyImageHolder(context, parent)
@@ -22,6 +22,10 @@ class GettyImageAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: GettyImageHolder?, position: Int) {
         holder?.bindView(itemList[position], position)
+    }
+
+    override fun onViewDetachedFromWindow(holder: GettyImageHolder?) {
+        holder?.detachedView()
     }
 
     override fun reload() {

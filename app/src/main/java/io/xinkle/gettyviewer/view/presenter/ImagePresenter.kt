@@ -15,8 +15,6 @@ class ImagePresenter : ImageContract.Presenter{
     override var adapterModel: GettyImageAdapterContract.Model? = null
     override var adapterView: GettyImageAdapterContract.View? = null
 
-    var page = 0
-
     override fun getImage() {
         ParserTask(view!!, adapterModel!!, adapterView!!).execute()
     }

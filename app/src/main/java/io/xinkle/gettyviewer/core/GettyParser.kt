@@ -1,7 +1,6 @@
 package io.xinkle.gettyviewer.core
 
 import org.jsoup.Jsoup
-import android.graphics.Bitmap
 
 object GettyParser {
     private const val PATH_TO_PARSE = "http://www.gettyimagesgallery.com/collections/archive/slim-aarons.aspx"

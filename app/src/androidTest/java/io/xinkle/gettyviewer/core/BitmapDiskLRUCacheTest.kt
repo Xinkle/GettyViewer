@@ -4,17 +4,15 @@ import android.content.Context
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import android.util.Log
-import com.jakewharton.disklrucache.DiskLruCache
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertTrue
 import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BitmapDiskLRUCacheTest {
-    lateinit var mContext: Context
-    lateinit var diskCache: BitmapDiskLRUCache
+    private lateinit var mContext: Context
+    private lateinit var diskCache: BitmapDiskLRUCache
 
     @Before
     fun setUp() {
