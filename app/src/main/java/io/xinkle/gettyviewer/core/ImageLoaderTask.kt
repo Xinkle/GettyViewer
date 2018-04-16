@@ -8,18 +8,25 @@ import android.widget.ImageView
 import io.xinkle.gettyviewer.R
 import java.lang.ref.WeakReference
 
+/**
+ * Class for load image to ImageView
+ * if image in Memory -> Disk cache, hit the cache
+ * otherwise, download image from web
+ */
 class ImageLoaderTask(mContext: Context, imageView: ImageView)
     : AsyncTask<String, Void, Bitmap>(){
-    private val TAG = "ImageLoaderTask"
+    companion object {
+        private const val TAG = "ImageLoaderTask"
+    }
     private val mMemoryCache = BitmapMemoryLRUCache
     private val mDiskCache = BitmapDiskLRUCache.getInstance(mContext.applicationContext)
     private val mWeakImageView: WeakReference<ImageView> = WeakReference(imageView)
 
-    var attached = true
 
     override fun onPreExecute() {
         mWeakImageView.get()!!.setImageResource(R.drawable.loading)
     }
+
     override fun doInBackground(vararg url: String): Bitmap? {
         return getImageFromURL(url[0],
                 mWeakImageView.get()!!.width,
@@ -27,7 +34,7 @@ class ImageLoaderTask(mContext: Context, imageView: ImageView)
     }
 
     override fun onPostExecute(resultBitmap: Bitmap) {
-        if (attached) mWeakImageView.get()!!.setImageBitmap(resultBitmap)
+        mWeakImageView.get()!!.setImageBitmap(resultBitmap)
     }
 
 

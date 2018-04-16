@@ -14,9 +14,6 @@ import kotlinx.android.synthetic.main.item.view.*
 class GettyImageHolder(private val context: Context, parent: ViewGroup?) :
         RecyclerView.ViewHolder(LayoutInflater.from(context)
                 .inflate(R.layout.item, parent, false)) {
-    companion object {
-        private const val TAG = "GettyImageHolder"
-    }
 
     private var task: ImageLoaderTask? = null
 

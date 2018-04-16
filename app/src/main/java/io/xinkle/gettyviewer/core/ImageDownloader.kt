@@ -8,6 +8,10 @@ import java.net.URL
 
 
 object ImageDownloader {
+    /**
+     * Get image from url
+     * if resize width & height available, do resize
+     */
     fun getImageFromUrl(urlString: String, width: Int = -1, height: Int = -1): Bitmap? {
         val url = URL(urlString)
 

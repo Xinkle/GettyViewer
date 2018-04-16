@@ -2,6 +2,9 @@ package io.xinkle.gettyviewer.core
 
 import android.graphics.BitmapFactory
 
+/**
+ * Calculate inSampleSize parameter to target width/height
+ */
 fun BitmapFactory.Options.calculateTargetSize(targetWidth: Int, targetHeight: Int): BitmapFactory.Options {
     var sampleSize = 1
 

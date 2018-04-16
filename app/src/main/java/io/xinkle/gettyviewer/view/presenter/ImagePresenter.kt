@@ -19,10 +19,11 @@ class ImagePresenter : ImageContract.Presenter{
         ParserTask(view!!, adapterModel!!, adapterView!!).execute()
     }
 
-    class ParserTask(val view: ImageContract.View,
+    class ParserTask(private val view: ImageContract.View,
                      private val adapterModel: GettyImageAdapterContract.Model,
                      private val adapterView: GettyImageAdapterContract.View) :
             AsyncTask<Void, Void, Void>() {
+
         override fun doInBackground(vararg p0: Void?): Void? {
             val imageUrls = GettyParser.parse()
 

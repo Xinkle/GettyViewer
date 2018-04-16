@@ -30,11 +30,7 @@ class BitmapDiskLRUCache(private val mDiskLRUCache: DiskLruCache) {
             return BitmapDiskLRUCache(diskCache)
         }
 
-        // Creates a unique subdirectory of the designated app cache directory. Tries to use external
-        // but if not mounted, falls back on internal storage.
         private fun getDiskCacheDir(context: Context, uniqueName: String): File {
-            // Check if media is mounted or storage is built-in, if so, try and use external cache dir
-            // otherwise use internal cache dir
             val cachePath = if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()
                     || !isExternalStorageRemovable())
                 context.externalCacheDir.path

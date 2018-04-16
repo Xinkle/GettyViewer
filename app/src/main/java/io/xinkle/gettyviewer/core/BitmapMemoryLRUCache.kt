@@ -12,7 +12,9 @@ object BitmapMemoryLRUCache {
             return bitmap!!.byteCount / 1024 // Kilobytes
         }
     }
-
+    /**
+     * Put bitmap to Disk LRU Cache
+     */
     fun putBitmap(key: String, bitmap: Bitmap) {
         val filteredKey = key.replace(Regex("[^a-z0-9_-]{1,120}"), "")
         if (getBitmap(filteredKey) == null) {
@@ -20,6 +22,10 @@ object BitmapMemoryLRUCache {
         }
     }
 
+    /**
+     * Return bitmap when key is available in Memory LRU Cache
+     * if key doesn't exist, return null
+     */
     fun getBitmap(key: String): Bitmap? {
         val filteredKey = key.replace(Regex("[^a-z0-9_-]{1,120}"), "")
         return mMemoryCache.get(filteredKey)
